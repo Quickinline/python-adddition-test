@@ -21,8 +21,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      if: ${{ git branch --list ${FIRST_NAME}_${LAST_NAME} }}
-
       - name: check if candidate exists already
         id: verify
         run: |
