@@ -32,7 +32,7 @@ jobs:
         if: steps.verify.outputs.already_exists != 1
         run: |
           git checkout --orphan ${FIRST_NAME}_${LAST_NAME}
-          git checkout master --Instructions.md
+          git checkout master -- Instructions.md
           git clean -fd
 
       - uses: EndBug/add-and-commit@v6
