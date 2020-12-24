@@ -25,4 +25,7 @@ jobs:
       - name: get Python version
         run: python --version
       
+      - name: list branches and current branch
+      - run: git status && echo $(git branch)
+      
 
