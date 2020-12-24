@@ -27,5 +27,16 @@ jobs:
       
       - name: list current files and check the HEAD
         run: ls -AlR .
+  
+  build-on-machine:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: get Python version
+        run: python --version
+      
+      - name: get git information
+        run: git status && echo $(git branch)
       
 
