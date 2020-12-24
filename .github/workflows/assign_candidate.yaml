@@ -1,0 +1,48 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Create branch for candidate
+
+# Controls when the action will run. 
+on:
+  # Triggers the workflow on push or pull request events but only for the master branch
+  push:
+    branches: [ master ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  create_candidate_branch:
+    runs-on: ubuntu-latest
+    env:
+      FIRST_NAME: Adel
+      LAST_NAME: Bouhraoua
+    steps:
+      - uses: actions/checkout@v2
+
+      if: ${{ git branch --list ${FIRST_NAME}_${LAST_NAME} }}
+
+      - name: check if candidate exists already
+        id: verify
+        run: |
+          if [ `git branch --list ${FIRST_NAME}_${LAST_NAME}` ]
+          then
+            echo "::set-output already_exists=OUTPUT::1"
+          fi
+      - name: create the branch locally
+        if: steps.verify.outputs.already_exists != 1
+        run: |
+          git checkout --orphan ${FIRST_NAME}_${LAST_NAME}
+          git checkout master --Instructions.md
+          git clean -fd
+
+      - uses: EndBug/add-and-commit@v6
+        with:
+          author_name: Quickinline
+          author_email: adelbouhraoua23@gmail.com
+          branch: ${{ env.FIRST_NAME }}_${{ env.LAST_NAME }}
+          message: created branch for ${{ env.FIRST_NAME }} ${{ env.LAST_NAME }}
+
+      
+
