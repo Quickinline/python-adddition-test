@@ -19,5 +19,5 @@ jobs:
       FIRST_NAME: Adel
       LAST_NAME: Bouhraoua
     steps:
-      - uses: skillsCheck/hello_world_action@v1
+      - uses: skillsCheck/hello_world_action@v1.1
 
