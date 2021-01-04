@@ -15,7 +15,32 @@ on:
 jobs:
   create_candidate_branch:
     runs-on: ubuntu-latest
-    container:
-      image: adelbouhraoua/hello-world:latest
+    env:
+      FIRST_NAME: Adel
+      LAST_NAME: Bouhraoua
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: check if candidate exists already
+        id: verify
+        run: |
+          if [ `git branch --list ${FIRST_NAME}_${LAST_NAME}` ]
+          then
+            echo "::set-output already_exists=OUTPUT::1"
+          fi
+      - name: create the branch locally
+        if: steps.verify.outputs.already_exists != 1
+        run: |
+          git checkout --orphan ${FIRST_NAME}_${LAST_NAME}
+          git checkout master -- Instructions.md
+          git clean -fd
+
+      # - uses: EndBug/add-and-commit@v6
+      #   with:
+      #     author_name: Quickinline
+      #     author_email: adelbouhraoua23@gmail.com
+      #     branch: ${{ env.FIRST_NAME }}_${{ env.LAST_NAME }}
+      #     message: created branch for ${{ env.FIRST_NAME }} ${{ env.LAST_NAME }}
+
       
 
