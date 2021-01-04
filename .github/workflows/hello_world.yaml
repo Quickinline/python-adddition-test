@@ -13,11 +13,8 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  create_candidate_branch:
+  hello_world_container_action:
     runs-on: ubuntu-latest
-    env:
-      FIRST_NAME: Adel
-      LAST_NAME: Bouhraoua
     steps:
       - uses: skillsCheck/hello_world_action@v1.1
 
